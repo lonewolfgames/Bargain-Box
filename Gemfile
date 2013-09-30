@@ -12,7 +12,7 @@ gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.0'
 
 # Bootstrap
-gem 'anjlab-bootstrap-rails', require: 'bootstrap-rails', github: 'anjlab/bootstrap-rails'
+gem 'bootstrap-sass', '>= 3.0.0', github: 'thomas-mcdonald/bootstrap-sass'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
