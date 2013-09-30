@@ -1,15 +1,14 @@
 BargainBox::Application.routes.draw do
   
-  scope module: "box" do
+  namespace :box, scope: :box do
     devise_for :users, controllers: { sessions: "box/sessions" }
     resources :carts do
       resources :items
     end
-    root to: "box/home#index", as: :box_authenticated_root
+    root to: "home#index"
   end
   
-  unauthenticated do
-    root to: "home#index", as: :unathenticated_root
-  end
+  
+  root "home#index"
   
 end
