@@ -5,11 +5,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
+  # relations
   has_many :carts
   has_many :items, through: :carts
   
   # hooks
   before_create :generate_auth_token
+  
   
   def generate_auth_token
     self.auth_token = loop do
