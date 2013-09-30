@@ -5,7 +5,6 @@ BargainBox::Application.routes.draw do
     resources :carts do
       resources :items
     end
-    root to: "home#index"
   end
   
   

@@ -35,7 +35,7 @@
           <div id="user-nav">
             <p>
             <% if box_user_signed_in? %>
-              <%= current_user.email %>
+              <%= current_box_user.email %>
               <%= link_to "Sign out", destroy_box_user_session_path, :method => :delete %>
               <%= link_to "Profile", edit_box_user_registration_path %>
             <% else %>

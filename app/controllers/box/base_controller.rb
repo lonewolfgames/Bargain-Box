@@ -3,6 +3,6 @@ class Box::BaseController < ApplicationController
   layout "box/app"
 
   def after_sign_in_path_for(user)
-    redirect_to box_root
+    raise "wat"
   end
 end
