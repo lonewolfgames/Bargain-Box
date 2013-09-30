@@ -14,13 +14,13 @@
 ActiveRecord::Schema.define(version: 20130924224445) do
 
   create_table "carts", force: true do |t|
-    t.integer  "User_id"
+    t.integer  "user_id"
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "carts", ["User_id"], name: "index_carts_on_User_id"
+  add_index "carts", ["user_id"], name: "index_carts_on_user_id"
 
   create_table "items", force: true do |t|
     t.integer  "carts_id"

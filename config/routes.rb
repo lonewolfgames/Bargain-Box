@@ -5,7 +5,7 @@ BargainBox::Application.routes.draw do
     resources :carts do
       resources :items
     end
-    root to: "home#index", as: :box_authenticated_root
+    root to: "box/home#index", as: :box_authenticated_root
   end
   
   unauthenticated do
