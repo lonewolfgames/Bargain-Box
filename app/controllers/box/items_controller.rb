@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class Box::ItemsController < Box::BaseController
   
   def index
     @items = Item.all
@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   end
   
   def create
-    @item = Item.new( params[:item] )
+    @item = Item.new( params.require(:item).permit( :title, :host, :url ) )
     
     if @item.save
       render :json => @item
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find( params[:id] )
     
-    if @item.update_attributes( params[:item] )
+    if @item.update_attributes( params.require(:item).permit( :title, :host, :url ) )
       render :json => @item
     end
   end
@@ -40,5 +40,12 @@ class ItemsController < ApplicationController
     @item = Item.find( params[:id] )
     @item.destroy
   end
+  
+  
+  private
+    
+    def item_params
+      params.require(:item).permit( :title, :host, :url )
+    end
   
 end

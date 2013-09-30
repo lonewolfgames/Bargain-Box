@@ -1,5 +1,5 @@
-class CartsController < ApplicationController
-
+class Box::CartsController < Box::BaseController
+  
   def index
     @carts = Cart.all
     render :json => @carts
@@ -16,7 +16,7 @@ class CartsController < ApplicationController
   end
   
   def create
-    @cart = Cart.new( params[:cart] )
+    @cart = Cart.new( params.require(:cart).permit( :title ) )
     
     if @cart.save
       render :json => @cart
@@ -31,7 +31,7 @@ class CartsController < ApplicationController
   def update
     @cart = Cart.find( params[:id] )
     
-    if @cart.update_attributes( params[:cart] )
+    if @cart.update_attributes( params.require(:item).permit( :title ) )
       render :json => @cart
     end
   end
@@ -39,6 +39,13 @@ class CartsController < ApplicationController
   def destroy
     @cart = Cart.find( params[:id] )
     @cart.destroy
+  end
+  
+  
+  private
+  
+  def cart_params
+    params.require(:cart).permit( :title )
   end
   
 end
