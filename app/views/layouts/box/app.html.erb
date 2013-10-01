@@ -24,24 +24,17 @@
     
     <div id="header">
       
-      <div class="wrap">
+      <div class="container">
         
         <div id="nav">
           
-          <div id="nav-menu">
-            
-          </div>
-          
           <div id="user-nav">
-            <p>
             <% if box_user_signed_in? %>
-              <%= current_box_user.email %>
-              <%= link_to "Sign out", destroy_box_user_session_path, :method => :delete %>
-              <%= link_to "Profile", edit_box_user_registration_path %>
+              <%= link_to "Sign out", destroy_box_user_session_path, { :method => :delete, :type=>"button", :class=>"btn btn-primary" } %>
+              <%= link_to "Profile", edit_box_user_registration_path, { :type=>"button", :class=>"btn btn-primary" } %>
             <% else %>
-              <%= link_to "Sign up", new_box_user_registration_path %> or <%= link_to "sign in", new_box_user_session_path %>
+              <%= link_to "Sign up", new_box_user_registration_path, { :type=>"button", :class=>"btn btn-primary" } %> or <%= link_to "Sign In", new_box_user_session_path, { :type=>"button", :class=>"btn btn-primary" } %>
             <% end %>
-            </p>
           </div>
           
         </div>
@@ -52,8 +45,8 @@
     
     <div id="main">
       
-      <div class="wrap">
-
+      <div class="container">
+        
         <%= yield %>
         
       </div>
@@ -62,7 +55,7 @@
     
     <div id="footer">
       
-      <div class="wrap">
+      <div class="container">
         
         
         
