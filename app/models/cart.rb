@@ -6,4 +6,5 @@ class Cart < ActiveRecord::Base
 
   # validations
   validates :title, presence: true
+  validates_length_of :title, minimum: 3
 end

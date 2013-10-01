@@ -1,0 +1,8 @@
+development:
+  app_subdomain: 'appdev'
+
+test:
+  app_subdomain: 'appdev'
+
+production:
+  app_subdomain: 'app'

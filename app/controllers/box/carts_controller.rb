@@ -19,7 +19,7 @@ class Box::CartsController < Box::BaseController
   def create
     @cart = current_user.carts.new( cart_params )
     if @cart.save
-      redirect_to box_carts_path
+      redirect_to carts_path
     else
       render action: :new
     end
@@ -41,7 +41,7 @@ class Box::CartsController < Box::BaseController
   def destroy
     @cart = current_user.carts.find( params[:id] )
     @cart.destroy
-    redirect_to [:box, :carts]
+    redirect_to carts_path
   end
   
   

@@ -1,6 +1,6 @@
 BargainBox::Application.routes.draw do
   
-  constraints(subdomain: 'app') do
+  constraints(subdomain: /app(dev)?/) do
     scope module: :box do
       devise_for :users, controllers: { sessions: "box/sessions", registrations: 'box/registrations' }
       resources :carts do

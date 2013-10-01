@@ -2,8 +2,8 @@
   #nav
     #user-nav
       - if user_signed_in?
-        = link_to t('sign_out'), destroy_user_session_path, { method: :delete, type: "button", class: "btn btn-primary" }
-        = link_to t('profile'), edit_user_registration_path, { type: 'button', class: 'btn btn-primary' }
+        = link_to t('sign_out'), destroy_user_session_url(subdomain: Settings.app_subdomain), { method: :delete, type: "button", class: "btn btn-primary" }
+        = link_to t('profile'), edit_user_registration_url(subdomain: Settings.app_subdomain), { type: 'button', class: 'btn btn-primary' }
       - else
-        = link_to t('sign_up'), new_user_registration_path, { type: 'button', class: 'btn btn-primary'}
-        = link_to t('sign_in'), new_user_session_path, { type: 'button', class: 'btn btn-primary'}
+        = link_to t('sign_up'), new_user_registration_url(subdomain: Settings.app_subdomain), { type: 'button', class: 'btn btn-primary'}
+        = link_to t('sign_in'), new_user_session_url(subdomain: Settings.app_subdomain), { type: 'button', class: 'btn btn-primary'}
