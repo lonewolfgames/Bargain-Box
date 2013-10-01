@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
   end
   
   def after_sign_in_path_for(resource)
-    box_authenticated_root_path
+    authenticated_root_path
   end
 end

@@ -2,34 +2,46 @@ class Box::CartsController < Box::BaseController
   respond_to :html, :json
 
   def index
-    @carts = current_box_user.carts.all
+    @carts = current_user.carts.all
     respond_with(@carts)
   end
   
   def show
-    @cart = current_box_user.carts.find( params[:id] )
+    @cart = current_user.carts.find( params[:id] )
     respond_with(@cart)
   end
   
   def new
-    @cart = current_box_user.carts.new
+    @cart = current_user.carts.new
+    respond_with(@cart)
   end
   
   def create
-    @cart = current_box_user.carts.new( cart_params )
+    @cart = current_user.carts.new( cart_params )
+    if @cart.save
+      redirect_to box_carts_path
+    else
+      render action: :new
+    end
   end
   
   def edit
-    @cart = current_box_user.carts.find( params[:id] )
+    @cart = current_user.carts.find( params[:id] )
   end
   
   def update
-    raise 'Implement'
+    @cart = current_user.carts.find( params[:id] )
+    if @cart.update_attributes( cart_params )
+      redirect_to box_carts_path
+    else
+      render action: :edit
+    end
   end
   
   def destroy
-    @cart = current_box_user.carts.find( params[:id] )
+    @cart = current_user.carts.find( params[:id] )
     @cart.destroy
+    redirect_to [:box, :carts]
   end
   
   

@@ -21,7 +21,14 @@
 
 en:
   app_title: 'Bargain Box'
+  action_check: 'Are you sure?'
   sign_in: 'Login'
   sign_up: 'Sign Up'
   sign_out: 'Logout'
   profile: 'Profile'
+
+  home:
+    index:
+      carts: 'Carts'
+  cart:
+    title: 'Title'

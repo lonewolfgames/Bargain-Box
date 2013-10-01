@@ -1,0 +1,8 @@
+= form_for @cart, class: 'form-horizontal' do |f|
+  .form-group
+    = f.label t('cart.title'), class: 'col-lg-2 control-label'
+    .col-lg-10
+      = f.text_field :title, class: 'form-control'
+
+  
+  = f.submit

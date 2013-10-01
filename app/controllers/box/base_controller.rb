@@ -1,7 +1,8 @@
 class Box::BaseController < ApplicationController
-  before_filter :authenticate_box_user!
+  before_filter :authenticate_user!
   prepend_before_filter :check_for_auth_token
   layout "box/app"
+  scoped_views = false
 
    private
     def check_for_auth_token

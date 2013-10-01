@@ -1,5 +1,5 @@
 %tr
   %td= cart.title
   %td
-    = link_to t('.edit'), [:edit, :box, cart]
-    = link_to t('.delete'), [:box, cart], method: :delete
+    = link_to t('.edit'), [:edit, cart]
+    = link_to t('.delete'), [cart], method: :delete, confirm: t('action_check'), data: { confirm: true }
