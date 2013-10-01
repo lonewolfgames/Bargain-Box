@@ -1,31 +1,26 @@
 class Box::CartsController < Box::BaseController
+  respond_to :html, :json
 
   def index
     @carts = current_box_user.carts.all
-    render :json => @carts
+    respond_with(@carts)
   end
   
   def show
     @cart = current_box_user.carts.find( params[:id] )
-    render :json => @cart
+    respond_with(@cart)
   end
   
   def new
     @cart = current_box_user.carts.new
-    render :json => @cart
   end
   
   def create
     @cart = current_box_user.carts.new( cart_params )
-    
-    if @cart.save
-      render :json => @cart
-    end
   end
   
   def edit
     @cart = current_box_user.carts.find( params[:id] )
-    render :json => @cart
   end
   
   def update
@@ -39,7 +34,7 @@ class Box::CartsController < Box::BaseController
   
   
   private
-  
+
     def cart_params
       params.require(:cart).permit( :title )
     end

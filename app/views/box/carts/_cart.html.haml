@@ -1,0 +1,5 @@
+%tr
+  %td= cart.title
+  %td
+    = link_to t('.edit'), [:edit, :box, cart]
+    = link_to t('.delete'), [:box, cart], method: :delete
