@@ -20,4 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  app_title: 'Bargain Box'
+  sign_in: 'Login'
+  sign_up: 'Sign Up'
+  sign_out: 'Logout'
+  profile: 'Profile'

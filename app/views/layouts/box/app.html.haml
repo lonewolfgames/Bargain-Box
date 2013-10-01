@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{ charset: 'utf-8' }
+    
+    %meta{ name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
+    %meta{ name: 'apple-mobile-web-app-capable', content: 'yes' }
+    
+    %meta{ name: 'viewport', content: "width=device-width, initial-scale=1.0" }
+
+    %title= t('app_title')
+
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true 
+
+    = csrf_meta_tags
+  %body{ class: "#{controller_name} #{action_name}" }
+
+    #header
+      = render 'layouts/box/partials/header'
+
+    #main
+      .container
+        .row
+          .col-md-3
+            = render 'layouts/box/partials/sidebar'
+          .col-md-9
+            = yield
+
+    #footer
+      = render 'layouts/box/partials/footer'
+    = render 'layouts/box/partials/footer_scripts'
