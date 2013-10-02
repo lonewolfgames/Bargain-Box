@@ -1,0 +1,6 @@
+- item ||= @item
+= simple_form_for item, url: [@cart, item], class: 'form-horizontal' do |item_form|
+  = item_form.input :title
+  = item_form.input :host
+  = item_form.input :url
+  = item_form.button :submit, class: 'btn btn-primary'

@@ -1,0 +1,13 @@
+%h2= @item.title
+
+%table.table.table-striped
+  %tbody
+    %tr
+      %td= t('.host')
+      %td= @item.host
+    %tr
+      %td= t('.url')
+      %td= @item.url
+    %tr
+      %td= t('.created_at')
+      %td= @item.created_at

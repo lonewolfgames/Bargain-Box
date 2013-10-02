@@ -1,7 +1,7 @@
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
-      t.references :carts, index: true
+      t.references :cart, index: true
       t.string :title
       t.string :host
       t.string :url

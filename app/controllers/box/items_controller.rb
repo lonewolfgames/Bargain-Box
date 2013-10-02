@@ -1,51 +1,61 @@
 class Box::ItemsController < Box::BaseController
-  
+  respond_to :html, :json
+  before_action :find_data
+
   def index
-    @items = Item.all
-    render :json => @items
+    @items = @cart.items.all
+    respond_with(@items)
   end
-  
-  def show
-    @item = Item.find( params[:id] )
-    render :json => @item
-  end
-  
+
   def new
-    @item = Item.new
-    render :json => @item
+    @item = @cart.items.new
+    respond_with(@item)
   end
-  
+
   def create
-    @item = Item.new( params.require(:item).permit( :title, :host, :url ) )
-    
+    @item = @cart.items.create( item_params )
+
     if @item.save
-      render :json => @item
+      redirect_to cart_items_path(@cart)
+    else
+      render action: :new
     end
   end
-  
+
+  def show
+    @item = @cart.items.find(params[:id])
+    respond_with(@item)
+  end
+
   def edit
-    @item = Item.find( params[:id] )
-    render :json => @item
+    @item = @cart.items.find(params[:id])
+    respond_with(@item)
   end
-  
+
   def update
-    @item = Item.find( params[:id] )
-    
-    if @item.update_attributes( params.require(:item).permit( :title, :host, :url ) )
-      render :json => @item
+    @item = @cart.items.find(params[:id])
+
+    if @item.update_attributes( item_params )
+      redirect_to cart_items_path(@cart)
+    else
+      render action: :edit
     end
   end
-  
+
   def destroy
-    @item = Item.find( params[:id] )
+    @item = @cart.items.find(params[:id])
     @item.destroy
+    redirect_to cart_items_path(@cart)
   end
-  
-  
+
+
   private
-    
     def item_params
-      params.require(:item).permit( :title, :host, :url )
+      params.require(:item).permit(:title, :host, :url)
+    end
+
+    def find_data
+      @cart = current_user.carts.find(params[:cart_id]) if params[:cart_id]
     end
   
 end

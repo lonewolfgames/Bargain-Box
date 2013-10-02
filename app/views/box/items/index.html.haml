@@ -1,0 +1,9 @@
+%h2= @cart.title
+%table
+  %thead
+    %th= t('.title')
+    %th= t('.host')
+    %th= t('.url')
+    %th= t('.options')
+  %tbody
+    = render @items

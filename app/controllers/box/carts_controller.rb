@@ -13,6 +13,7 @@ class Box::CartsController < Box::BaseController
   
   def new
     @cart = current_user.carts.new
+    @cart.items.build
     respond_with(@cart)
   end
   
@@ -48,7 +49,6 @@ class Box::CartsController < Box::BaseController
   private
 
     def cart_params
-      params.require(:cart).permit( :title )
+      params.require(:cart).permit( :title, items_attributes: [:id, :title, :url, :host] )
     end
-  
 end
