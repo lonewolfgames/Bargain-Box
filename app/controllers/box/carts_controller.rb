@@ -32,7 +32,7 @@ class Box::CartsController < Box::BaseController
   def update
     @cart = current_user.carts.find( params[:id] )
     if @cart.update_attributes( cart_params )
-      redirect_to box_carts_path
+      redirect_to carts_path
     else
       render action: :edit
     end
