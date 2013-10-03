@@ -7,6 +7,7 @@ gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'state_machine', ">= 1.2.0"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -30,7 +31,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 gem 'haml-rails'
-
 gem 'simple_form'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
