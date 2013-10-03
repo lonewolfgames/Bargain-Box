@@ -36,6 +36,8 @@ GEM
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
+    celluloid (0.15.1)
+      timers (~> 1.1.0)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -43,6 +45,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    connection_pool (1.1.0)
     devise (3.1.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -94,6 +97,9 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.0.5)
+    redis-namespace (1.3.1)
+      redis (~> 3.0.0)
     sass (3.2.10)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -102,6 +108,12 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
+    sidekiq (2.15.0)
+      celluloid (>= 0.15.1)
+      connection_pool (>= 1.0.0)
+      json
+      redis (>= 3.0.4)
+      redis-namespace (>= 1.3.1)
     simple_form (3.0.0)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
@@ -120,6 +132,7 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    timers (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -145,6 +158,7 @@ DEPENDENCIES
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc
+  sidekiq
   simple_form
   sqlite3
   state_machine (>= 1.2.0)
