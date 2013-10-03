@@ -4,13 +4,13 @@ class Box::CartsController < Box::BaseController
   # GET /carts
   def index
     @carts = current_user.carts.all
-    respond_with(@carts)
+    respond_with @carts
   end
   
   # GET /carts/:id
   def show
     @cart = current_user.carts.find( params[:id] )
-    respond_with(@cart)
+    respond_with @cart
   end
   
   # GET /carts/new

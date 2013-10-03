@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131003170112) do
+ActiveRecord::Schema.define(version: 20130924224445) do
 
   create_table "carts", force: true do |t|
     t.integer  "user_id"
@@ -29,11 +29,6 @@ ActiveRecord::Schema.define(version: 20131003170112) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "base_price",    default: 0
-    t.string   "product_title"
-    t.string   "image_url"
-    t.integer  "user_rating",   default: 0
-    t.string   "state"
   end
 
   add_index "items", ["cart_id"], name: "index_items_on_cart_id"
