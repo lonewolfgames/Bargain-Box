@@ -26,3 +26,7 @@ Each Product has the following attributes (this is a complete list):
 * comments_rating    (the average value of all user comments)
 * seller_rating      (the product sellers rating based off of multiple attributes - from the sellers db table)
 * shipping_rating    (the overall shipping rating based off of multiple attributes from the shippings database table)
+
+#### Authors
+John Faucett
+Nathan Faucett
