@@ -1,7 +1,12 @@
-%tr
-  %td= cart.title
-  %td
-    = link_to t('actions.edit'), [:edit, cart]
-    = link_to t('actions.show'), [cart]
-    = link_to t('actions.delete'), [cart], method: :delete, confirm: t('action_check'), data: { confirm: true }
+- view ||= :table
 
+- case view
+- when :table
+  %tr
+    %td= cart.title
+    %td
+      = link_to I18n.t('actions.edit'), [:edit, cart]
+      = link_to t('actions.show'), [cart]
+      = link_to t('actions.delete'), [cart], method: :delete, confirm: t('action_check'), data: { confirm: true }
+- when :list
+  %li= link_to cart.title, [cart] 
