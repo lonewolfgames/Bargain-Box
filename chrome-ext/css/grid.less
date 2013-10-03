@@ -1,0 +1,40 @@
+@grid_margin: 0.999;
+@grid_spaces: 12;
+
+.clearfix(){
+    *zoom:1;
+    &:before,
+    &:after{
+        content:"";
+        display:table;
+    }
+    &:after{
+        clear:both;
+    }
+}
+
+.block{
+    .clearfix();
+    position: relative;
+    display: block;
+}
+
+.loop (@index) when (@index > 0){
+    
+    .block .grid_@{index}{
+        margin: 0 ( @grid_margin*1%);
+        width: ( ( ( @index / @grid_spaces * 99.999 ) - @grid_margin * 2 ) + 0% );
+        float: left;
+        display: block;
+        
+        @media( max-width: 768px ){
+            width: ( 99.999 - ( @grid_margin * 2 ) + 0% );
+            float: none;
+        }
+    }
+    
+    .loop( @index - 1 );
+}
+
+.loop(0){}
+.loop( @grid_spaces );

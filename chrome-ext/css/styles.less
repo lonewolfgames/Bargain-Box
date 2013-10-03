@@ -1,0 +1,14 @@
+@body_background: #fff;
+
+@wrap_width: 960;
+@wrap_padding: 20;
+
+body{
+    background: @body_background;
+}
+
+.wrap{
+    max-width: ( @wrap_width - @wrap_padding * 2 * 1px );
+    margin: 0 auto;
+    padding: 0px ( @wrap_padding * 1px );
+}
