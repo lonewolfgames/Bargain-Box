@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20131003170112) do
+=======
+ActiveRecord::Schema.define(version: 20131002160138) do
+>>>>>>> 9743874... updated chrome-ext
 
   create_table "carts", force: true do |t|
     t.integer  "user_id"
