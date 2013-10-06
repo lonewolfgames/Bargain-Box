@@ -1,10 +1,7 @@
 (function( window, document, $, undefined ){
-	var URL = "http://appdev.bargin-box.com:3000",
+	var URL = "http://appdev.bargain-box.com:3000",
 		AUTH_ROKEN = "451f7863a829a70ce7f1d50155b11822b41aafe7",
 		
-		HEADERS = {
-			
-		},
 		CACHE = false,
 		json = "json",
 		
@@ -13,17 +10,17 @@
 		PUT = "PUT",
 		PACTH = "PATCH";
 	
-	get("/carts", function( xhr, textStatus ){
+	get("/carts", function( json ){
 		
-		console.log( xhr, textStatus );
+		console.log( json );
 	});
 	
 	
-	function get( url, callback ){
+	function get( url, success, error ){
 		
 		$.ajax({
 			type: GET,
-			url: URL + url,
+			url: URL + url + ".json",
 			cache: CACHE,
 			crossDomain: true,
 			dataType: json,
@@ -31,9 +28,13 @@
 				req.setRequestHeader("X-AUTH-TOKEN", AUTH_ROKEN );
 				req.setRequestHeader("Content-Type", "application/json");
 			},
-			complete: function( xhr, textStatus ){
+			success: function( data, textStatus, xhr ){
 				
-				callback( xhr, textStatus );
+				success( data, textStatus, xhr );
+			},
+			error: function( xhr, textStatus, errorThrown ){
+				
+				error && error( xhr, textStatus, errorThrown );
 			}
 		});
 	}

@@ -17,7 +17,7 @@ class Box::CartsController < Box::BaseController
   def new
     @cart = current_user.carts.new
     @cart.items.build
-    respond_with(@cart)
+    respond_with @cart
   end
   
   # POST /carts
