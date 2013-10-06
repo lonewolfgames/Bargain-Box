@@ -2,7 +2,7 @@ class Box::BaseController < ApplicationController
   before_action :authenticate_user!
   before_action :find_base_data
 
-  prepend_before_action :check_for_auth_token
+  #prepend_before_action :check_for_auth_token
   layout "box/app"
   scoped_views = false
 
