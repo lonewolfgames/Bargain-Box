@@ -4,18 +4,13 @@ class Box::CartsController < Box::BaseController
   # GET /carts
   def index
     @carts = current_user.carts.all
-    
-    if request.content_type == "application/json"
-      render :json => @carts
-    else
-      render :html => @carts
-    end
+    respond_with(@carts)
   end
   
   # GET /carts/:id
   def show
     @cart = current_user.carts.find( params[:id] )
-    respond_with @cart
+    respond_with(@cart)
   end
   
   # GET /carts/new
