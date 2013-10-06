@@ -18,10 +18,11 @@ Each Product has the following attributes (this is a complete list):
 * price
 * base_price
 * shipping_price
-* tax
-* rebate
+* product_title
+* tax_price
 * image
-* page_url
+* url
+* user_rating
 * user_comments      (this is a list of all comments)
 * comments_rating    (the average value of all user comments)
 * seller_rating      (the product sellers rating based off of multiple attributes - from the sellers db table)
