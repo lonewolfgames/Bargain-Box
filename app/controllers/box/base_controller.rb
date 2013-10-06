@@ -16,7 +16,7 @@ class Box::BaseController < ApplicationController
     end
 
     def find_base_data
-      @carts = current_user.carts.all
+      @carts = current_user.carts.load
     end
 
 end
