@@ -3,7 +3,7 @@ class Box::ItemsController < Box::BaseController
   before_action :find_data
 
   def index
-    @items = @cart.items.all
+    @items = @cart.items.to_a
     respond_with @items
   end
 
