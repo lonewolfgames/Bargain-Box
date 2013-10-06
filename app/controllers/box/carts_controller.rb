@@ -4,7 +4,12 @@ class Box::CartsController < Box::BaseController
   # GET /carts
   def index
     @carts = current_user.carts.all
-    respond_with @carts
+    
+    if request.content_type == "application/json"
+      render :json => @carts
+    else
+      render :html => @carts
+    end
   end
   
   # GET /carts/:id
@@ -17,7 +22,7 @@ class Box::CartsController < Box::BaseController
   def new
     @cart = current_user.carts.new
     @cart.items.build
-    respond_with(@cart)
+    respond_with @cart
   end
   
   # POST /carts

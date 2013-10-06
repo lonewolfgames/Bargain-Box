@@ -4,7 +4,7 @@ class Box::ItemsController < Box::BaseController
 
   def index
     @items = @cart.items.all
-    respond_with(@items)
+    respond_with @items
   end
 
   def new
