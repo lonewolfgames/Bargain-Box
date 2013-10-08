@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "black", :name => "apple-mobile-web-app-status-bar-style"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "keywords"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    = csrf_meta_tags
+    %title Bargain Box
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+  %body{:class => "#{controller_name} #{action_name}"}
+    #header
+      .container
+        #nav
+          #nav-menu
+          #user-nav
+            - if user_signed_in?
+              = link_to "Sign out", destroy_user_session_url(subdomain: Settings.app_subdomain), { :method => :delete, :type=>"button", :class=>"btn btn-primary" }
+              = link_to "Profile", edit_user_registration_url(subdomain: Settings.app_subdomain), { :type=>"button", :class=>"btn btn-primary" }
+            - else
+              = link_to "Sign Up", new_user_registration_url(subdomain: Settings.app_subdomain), { :type=>"button", :class=>"btn btn-primary" }
+              = link_to "Sign In", new_user_session_url(subdomain: Settings.app_subdomain), { :type=>"button", :class=>"btn btn-primary" }
+          .clearfix
+    #main
+      .container
+        = yield
+    #footer
+      .container

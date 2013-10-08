@@ -522,8 +522,10 @@ table {
 
 body {
   background: #ffffff;
+  padding: 20px 0px;
 }
 .wrap {
+  min-width: 280px;
   max-width: 920px;
   margin: 0 auto;
   padding: 0px 20px;

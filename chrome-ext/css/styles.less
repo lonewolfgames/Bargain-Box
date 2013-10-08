@@ -1,13 +1,16 @@
 @body_background: #fff;
 
 @wrap_width: 960;
+@wrap_min_width: 320;
 @wrap_padding: 20;
 
 body{
     background: @body_background;
+    padding: ( @wrap_padding * 1px ) 0px;
 }
 
 .wrap{
+    min-width: ( @wrap_min_width - @wrap_padding * 2 * 1px );
     max-width: ( @wrap_width - @wrap_padding * 2 * 1px );
     margin: 0 auto;
     padding: 0px ( @wrap_padding * 1px );
