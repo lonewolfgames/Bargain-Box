@@ -4,12 +4,23 @@
 		
 		TOKEN = "3bacae91697fc0a70f6f4c761b87bc4ed525a606",
 		SIGNED_IN = false,
-		CARTS = undefined;
+		CARTS = undefined,
+		DOMAIN_PARSE = /^[\w-]+:\/*\[?([\w\.:-]+)\]?(?::\d+)?/,
+		
+		new_chart_form_html = '<p>New Cart</p>'+
+		'<form class="block">'+
+			'<div class="grid_8">'+
+				'<input class="form-control" autofocus="autofocus" id="title" name="title" type="text" value="" placeholder="Title">'+
+			'</div>'+
+			'<div class="grid_4">'+
+				'<input class="btn btn-primary" name="commit" type="submit" value="Create">'+
+			'</div>'+
+		'</form>'
 	
 	$(init);
 	
 	function init() {
-		get("/carts.json",
+		ajaxGet("/carts.json",
 			function(data) {
 				start(data);
 			},
@@ -20,34 +31,45 @@
 	}
 	
 	function sign_in() {
-		get("/users/sign_in",
+		ajaxGet("/users/sign_in",
 			function(html){
 				var app_div = $("#app");
 				SIGNED_IN = false;
 				
-				app_div.empty();
+				clear();
 				app_div.append(html);
 				
 				$("#app form").prependString("action", baseURL);
 				
 				var atag = $("#app a");
 				atag.prependString("href", baseURL);
-				atag.attr("target", "_blank");
+				atag.attr("tarajaxGet", "_blank");
 				
 				$("#app form").on("submit", function(e){
 					e.preventDefault();
 					
-					post("/users/sign_in",
+					var email = $("#app form #user_email").val(),
+						password = $("#app form #user_password").val();
+					
+					if (!email.length){
+						displayError("email is invalid");
+						return;
+					}
+					if (!password.length){
+						displayError("password is invalid");
+						return;
+					}
+					
+					ajaxPost("/users/sign_in",
 						{
 							commit: "Sign in",
-							authenticity_token: $("input[name='authenticity_token']").val(),
+							authenticity_token: $("#app form input[name='authenticity_token']").val(),
 							user: {
-								email: $("#user_email").val(),
-								password: $("#user_password").val()
+								email: email,
+								password: password
 							}
 						},
 						function(data) {
-							console.log(data);
 							init();
 						},
 						function(error) {
@@ -63,7 +85,14 @@
 	}
 	
 	function displayError(error) {
-		console.log(error);
+		var el = $("<p class='message error'>"+ error +"</p>");
+		el.delay(4000).fadeOut(250);
+		$("#messages").prepend(el);
+	}
+	function displayMessage(message) {
+		var el = $("<p class='message'>"+ message +"</p>");
+		el.delay(4000).fadeOut(250);
+		$("#messages").prepend(el);
 	}
 	
 	function start(carts) {
@@ -72,29 +101,102 @@
 		home();
 	}
 	
-	function home() {
+	function home(active) {
 		var app_div = $("#app"),
+		
 			top_bar = $("<div class='padding block'>"),
+			carts_holder = $("<div class='padding block'>"),
 			bottom_bar = $("<div class='padding block'>"),
-			new_btn = $("<button class='grid_4'>New</button>"),
-			save_btn = $("<button class='grid_6'>Save</button>"),
-			compare_btn = $("<button class='grid_6'>Compare</button>");
+			
+			new_cart_btn = $("<button class='btn btn-primary grid_6'>New Cart</button>"),
+			delete_cart_btn = $("<button class='btn btn-danger grid_6'>Delete Cart</button>"),
+			carts_select = createOptions("carts-select", "grid_12 form-control", CARTS, "title"),
+			
+			save_btn = $("<button class='btn btn-primary grid_6'>Save Item</button>"),
+			compare_btn = $("<button class='btn btn-primary grid_6'>Compare</button>");
 		
-		app_div.empty();
+		clear();
 		
-		top_bar.append(createOptions("carts-select", "grid_8", CARTS, "title"), new_btn);
+		carts_holder.append(carts_select);
+		top_bar.append(new_cart_btn, delete_cart_btn);
+		
+		new_cart_btn.on("click", new_cart);
+		delete_cart_btn.on("click", delete_cart);
+		
 		bottom_bar.append(save_btn, compare_btn);
+		save_btn.on("click", save_item);
 		
-		save_btn.on("click", save_page);
+		if (active) carts_select.val(active);
 		
-		app_div.append(top_bar, bottom_bar);
+		app_div.append(top_bar, carts_holder, bottom_bar);
 	}
 	
-	function save_page() {
+	function new_cart() {
+		var app_div = $("#app"),
+			top_bar = $('<div class="block">'),
+			back_btn = $("<button class='btn btn-primary grid_4 push_8'>Back</button>"),
+			form = $(new_chart_form_html);
+		
+		clear();
+		
+		top_bar.append(back_btn);
+		back_btn.on("click", home);
+		
+		app_div.append(top_bar, form);
+		
+		$("#app form").on("submit", function(e){
+			e.preventDefault();
+			
+			var title = $("#app form #title").val();
+			if (!title.length) {
+				displayError("Cart needs a title");
+				return;
+			}
+			
+			ajaxPost("/carts.json",
+				{cart: { title: title }},
+				function(data) {
+					CARTS.push(data);
+					home(data.id);
+					displayMessage("New cart "+ title +" created");
+				},
+				function(error) {
+					displayError(error);
+				}
+			);
+		});
+	}
+	
+	function delete_cart() {
 		var cart_id = $("#carts-select").val();
 		
-		if (cart_id === -1) {
-			displayError("You must select a cart to save item to")
+		if (!cart_id) {
+			displayError("You don't any carts to delete");
+			return;
+		}
+		
+		ajaxDelete("/carts/"+ cart_id +".json",
+			function(data) {
+				var cart = arrayWhere(CARTS, "id", cart_id);
+				
+				if (cart) {
+					index = CARTS.indexOf(cart);
+					CARTS.splice(index,1);
+				}
+				home();
+				displayMessage("Cart "+ title +" was deleted");
+			},
+			function(error) {
+				displayError(error);
+			}
+		);
+	}
+	
+	function save_item() {
+		var cart_id = $("#carts-select").val();
+		
+		if (!cart_id) {
+			displayError("You must select a cart first");
 			return;
 		}
 		
@@ -103,14 +205,15 @@
 				function (response){
 					var url = response.url;
 					
-					post("/carts/"+ cart_id +"/items",
+					ajaxPost("/carts/"+ cart_id +"/items",
 						{
 							title: response.title,
 							url: url,
-							host: url.match(/^[\w-]+:\/*\[?([\w\.:-]+)\]?(?::\d+)?/)[1]
+							host: url.match(DOMAIN_PARSE)[1]
 						},
 						function(data){
 							console.log(data);
+							displayMessage("Item was saved successfully");
 						},
 						function(error){
 							displayError(error);
@@ -132,10 +235,11 @@
 			},
 			success: function(data) {
 				sign_in();
+				displayMessage("Your where sign out successfully");
 			},
 			error: function(xhr, textStatus, errorThrown) {
-				displayError(errorThrown);
 				home();
+				displayError(errorThrown);
 			}
 		});
 	}
@@ -156,7 +260,11 @@
 		return select;
 	}
 	
-	function get(url, success, error) {
+	function clear() {
+		$("#app, #messages").empty();
+	}
+	
+	function ajaxGet(url, success, error) {
 		
 		$.ajax({
 			url: baseURL + url,
@@ -180,7 +288,7 @@
 		});
 	}
 	
-	function post(url, data, success, error) {
+	function ajaxPost(url, data, success, error) {
 		if (typeof(data) !== "string") data = JSON.stringify(data);
 		
 		$.ajax({
@@ -206,6 +314,38 @@
 			}
 		});
 	}
+	
+	function ajaxDelete(url, success, error) {
+		
+		$.ajax({
+			url: baseURL + url,
+			type: "DELETE",
+			crossDomain: true,
+			beforeSend: function(xhr) {
+				if (SIGNED_IN) xhr.setRequestHeader("X-CSRF-Token", TOKEN);
+			},
+			success: function(data) {
+				
+				success && success(data);
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				
+				if (error) {
+					error(errorThrown);
+				} else {
+					throw errorThrown;
+				}
+			}
+		});
+	}
+	
+	function arrayWhere(array, attr, value){
+		
+		for (var i = array.length; i--;) {
+			if( array[i][attr] == value ) return array[i];
+		}
+		return undefined;
+	};
 	
 	$.fn.prependString = function(attr, string) {
 		var value = this.attr(attr);

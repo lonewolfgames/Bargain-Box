@@ -8,7 +8,6 @@
 
 body{
     background: @body_background;
-    padding: ( @wrap_padding * 1px ) 0px;
 }
 
 .wrap{
@@ -18,6 +17,16 @@ body{
     margin: 0 auto;
 }
 
-.padding{
-    padding: ( @padding * 1px ) 0px
+.padding{ padding: ( @padding * 1px ) 0px }
+.padding-top{ padding-top: ( @padding * 1px ) }
+.padding-bottom{ padding-bottom: ( @padding * 1px )}
+
+.message {
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin: 2px 0px;
+}
+.message.error {
+    color: #ffffff;
+    background: #d9534f;
 }

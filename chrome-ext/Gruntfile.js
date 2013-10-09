@@ -26,6 +26,7 @@ module.exports = function(grunt) {
                 files: {
                     "build/index.css": [
                         "lib/css/normalize.css",
+                        "lib/bootstrap-3.0.0/less/bootstrap.less",
                         "css/grid.less",
                         "css/styles.less",
                         "css/mobile.less"

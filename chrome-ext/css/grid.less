@@ -28,6 +28,14 @@
         display: block;
     }
     
+    .block .push_@{index}{
+        margin-left: ( ( ( @index / @grid_spaces * 99.999 ) - @grid_margin * 2 ) + 0% ) !important;
+    }
+    
+    .block .pull_@{index}{
+        margin-left: -( ( ( @index / @grid_spaces * 99.999 ) - @grid_margin * 2 ) + 0% ) !important;
+    }
+    
     .loop( @index - 1 );
 }
 

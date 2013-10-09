@@ -24,11 +24,14 @@ class Box::CartsController < Box::BaseController
   def create
     @cart = current_user.carts.new( cart_params )
     if @cart.save
-      redirect_to carts_path
+      respond_to do |format|
+        format.html { redirect_to carts_path }
+        format.json { render :json => @cart }
+      end
     else
-      respond_to do |wants|
-        wants.html  { render action: :new }
-        wants.js    { render json: @cart }
+      respond_to do |format|
+        format.html { render action: :new }
+        format.json { render json: @cart }
       end
     end
   end
@@ -48,8 +51,18 @@ class Box::CartsController < Box::BaseController
   
   def destroy
     @cart = current_user.carts.find( params[:id] )
-    @cart.destroy
-    redirect_to carts_path
+    
+    if @cart.destroy
+      respond_to do |format|
+        format.html { redirect_to carts_path }
+        format.json { render :json => @cart }
+      end
+    else
+      respond_to do |format|
+        format.html { render action: :new }
+        format.json { render json: @cart }
+      end
+    end
   end
   
   
