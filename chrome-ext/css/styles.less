@@ -1,8 +1,10 @@
 @body_background: #fff;
 
-@wrap_width: 960;
+@wrap_max_width: 480;
 @wrap_min_width: 320;
 @wrap_padding: 20;
+
+@padding: 10px;
 
 body{
     background: @body_background;
@@ -10,8 +12,12 @@ body{
 }
 
 .wrap{
-    min-width: ( @wrap_min_width - @wrap_padding * 2 * 1px );
-    max-width: ( @wrap_width - @wrap_padding * 2 * 1px );
-    margin: 0 auto;
+    max-width: ( @wrap_max_width - ( @wrap_padding * 2 * 1px ) );
+    min-width: ( @wrap_min_width - ( @wrap_padding * 2 * 1px ) );
     padding: 0px ( @wrap_padding * 1px );
+    margin: 0 auto;
+}
+
+.padding{
+    padding: ( @padding * 1px ) 0px
 }
