@@ -6431,6 +6431,9 @@ body {
   padding: 0px 20px;
   margin: 0 auto;
 }
+a {
+  cursor: pointer;
+}
 .padding {
   padding: 10px 0px;
 }
@@ -6440,12 +6443,9 @@ body {
 .padding-bottom {
   padding-bottom: 10px;
 }
-.message {
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin: 2px 0px;
+.padding-left {
+  padding-left: 10px;
 }
-.message.error {
-  color: #ffffff;
-  background: #d9534f;
+.padding-right {
+  padding-right: 10px;
 }

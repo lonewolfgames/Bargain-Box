@@ -36,6 +36,7 @@
 				var app_div = $("#app");
 				SIGNED_IN = false;
 				
+				$("#user-nav").empty();
 				clear();
 				app_div.append(html);
 				
@@ -99,14 +100,15 @@
 	}
 	
 	function displayError(error) {
-		var el = createElement(undefined, "message error", "p", error);
+		var el = createElement(undefined, "text-danger", "p", error);
 		el.delay(4000).fadeOut(250, function(){
 			$(this).remove();
 		});
 		$("#messages").prepend(el);
 	}
+	
 	function displayMessage(message) {
-		var el = createElement(undefined, "message", "p", message);
+		var el = createElement(undefined, "text-success", "p", message);
 		el.delay(4000).fadeOut(250, function(){
 			$(this).remove();
 		});
@@ -116,6 +118,19 @@
 	function start(carts) {
 		SIGNED_IN = true;
 		CARTS = carts;
+		
+		var user_nav = $("#user-nav"),
+			sign_out_btn = createElement(undefined, "padding-right", "a", "Sign Out"),
+			profile_btn = createElement(undefined, "padding-right", "a", "Profile");
+		
+		user_nav.empty();
+		user_nav.append(sign_out_btn, profile_btn);
+		
+		sign_out_btn.on("click", sign_out);
+		profile_btn.on("click", function(){
+			window.open(baseURL +"/users/edit");
+		});
+		
 		home();
 	}
 	
