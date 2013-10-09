@@ -13,5 +13,7 @@ BargainBox::Application.routes.draw do
     end
     
     root "home#index"
+    get "/about", to: "home#about"
+    get "/contact", to: "home#contact"
   end
 end

@@ -84,14 +84,32 @@
 		);
 	}
 	
+	function sign_out() {
+		
+		ajaxDelete("/users/sign_out",
+			function(data) {
+				sign_in();
+				displayMessage("Your where sign out successfully");
+			},
+			function(error) {
+				home();
+				displayError(errorThrown);
+			}
+		);
+	}
+	
 	function displayError(error) {
-		var el = $("<p class='message error'>"+ error +"</p>");
-		el.delay(4000).fadeOut(250);
+		var el = createElement(undefined, "message error", "p", error);
+		el.delay(4000).fadeOut(250, function(){
+			$(this).remove();
+		});
 		$("#messages").prepend(el);
 	}
 	function displayMessage(message) {
-		var el = $("<p class='message'>"+ message +"</p>");
-		el.delay(4000).fadeOut(250);
+		var el = createElement(undefined, "message", "p", message);
+		el.delay(4000).fadeOut(250, function(){
+			$(this).remove();
+		});
 		$("#messages").prepend(el);
 	}
 	
@@ -103,21 +121,22 @@
 	
 	function home(active) {
 		var app_div = $("#app"),
-		
-			top_bar = $("<div class='padding block'>"),
-			carts_holder = $("<div class='padding block'>"),
-			bottom_bar = $("<div class='padding block'>"),
 			
-			new_cart_btn = $("<button class='btn btn-primary grid_6'>New Cart</button>"),
-			delete_cart_btn = $("<button class='btn btn-danger grid_6'>Delete Cart</button>"),
+			top_bar = createElement(undefined, "padding block", "div"),
+			select_holder = createElement(undefined, "padding block", "div"),
+			bottom_bar = createElement(undefined, "padding block", "div"),
+			
+			new_cart_btn = createElement(undefined, "btn btn-primary grid_6", "button", "New Cart"),
+			delete_cart_btn = createElement(undefined, "btn btn-danger grid_6", "button", "Delete Cart"),
+			
 			carts_select = createOptions("carts-select", "grid_12 form-control", CARTS, "title"),
 			
-			save_btn = $("<button class='btn btn-primary grid_6'>Save Item</button>"),
-			compare_btn = $("<button class='btn btn-primary grid_6'>Compare</button>");
+			save_btn = createElement(undefined, "btn btn-primary grid_6", "button", "Save Item"),
+			compare_btn = createElement(undefined, "btn btn-primary grid_6", "button", "Compare");
 		
 		clear();
 		
-		carts_holder.append(carts_select);
+		select_holder.append(carts_select);
 		top_bar.append(new_cart_btn, delete_cart_btn);
 		
 		new_cart_btn.on("click", new_cart);
@@ -126,15 +145,17 @@
 		bottom_bar.append(save_btn, compare_btn);
 		save_btn.on("click", save_item);
 		
+		compare_btn.on("click", compare_items);
+		
 		if (active) carts_select.val(active);
 		
-		app_div.append(top_bar, carts_holder, bottom_bar);
+		app_div.append(top_bar, select_holder, bottom_bar);
 	}
 	
 	function new_cart() {
 		var app_div = $("#app"),
-			top_bar = $('<div class="block">'),
-			back_btn = $("<button class='btn btn-primary grid_4 push_8'>Back</button>"),
+			top_bar = createElement(undefined, "block", "div"),
+			back_btn = createElement(undefined, "btn btn-primary grid_4 push_8", "button", "Back"),
 			form = $(new_chart_form_html);
 		
 		clear();
@@ -184,7 +205,7 @@
 					CARTS.splice(index,1);
 				}
 				home();
-				displayMessage("Cart "+ title +" was deleted");
+				displayMessage("Cart "+ cart.title +" was deleted");
 			},
 			function(error) {
 				displayError(error);
@@ -224,44 +245,43 @@
 		});
 	}
 	
-	function sign_out() {
+	function compare_items() {
+		var cart_id = $("#carts-select").val();
 		
-		$.ajax({
-			url:baseUrl +"/users/sign_out",
-			type: "DELETE",
-			crossDomain: true,
-			beforeSend: function(xhr) {
-				if (SIGNED_IN) xhr.setRequestHeader("X-CSRF-Token", TOKEN);
-			},
-			success: function(data) {
-				sign_in();
-				displayMessage("Your where sign out successfully");
-			},
-			error: function(xhr, textStatus, errorThrown) {
-				home();
-				displayError(errorThrown);
-			}
-		});
-	}
-	
-	function createOptions(id, className, array, field) {
-		var select = $("<select>"),
-			option,
-			i;
-		
-		if (id) select.attr("id", id);
-		if (className) select.attr("class", className);
-		
-		for (i = 0; i < array.length; i++) {
-			option = array[i];
-			select.append( $("<option>").attr("value", option.id ).html( option[field] ) )
+		if (!cart_id) {
+			displayError("You must select a cart first");
+			return;
 		}
 		
-		return select;
+		window.open(baseURL +"/carts/"+ cart_id);
 	}
 	
 	function clear() {
 		$("#app, #messages").empty();
+	}
+	
+	function createElement(id, className, tag, text) {
+		var el = $(document.createElement(tag));
+		
+		if (id) el.attr("id", id);
+		if (className) el.attr("class", className);
+		if (text) el.html(text);
+		
+		return el;
+	}
+	
+	function createOptions(id, className, array, field) {
+		if (!array) return undefined;
+		var select = createElement(id, className, "select");
+			option,
+			i;
+		
+		for (i = 0; i < array.length; i++) {
+			option = array[i];
+			select.append( createElement(id, className, "option", option[field]).attr("value", option.id ) );
+		}
+		
+		return select;
 	}
 	
 	function ajaxGet(url, success, error) {

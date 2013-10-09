@@ -21,15 +21,14 @@ module.exports = function(grunt) {
                         "css",
                         "lib/css"
                     ],
-                    yuicompress: false
+                    yuicompress: true
                 },
                 files: {
                     "build/index.css": [
                         "lib/css/normalize.css",
                         "lib/bootstrap-3.0.0/less/bootstrap.less",
                         "css/grid.less",
-                        "css/styles.less",
-                        "css/mobile.less"
+                        "css/styles.less"
                     ]
                 }
             }
