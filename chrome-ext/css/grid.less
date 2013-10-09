@@ -26,11 +26,6 @@
         width: ( ( ( @index / @grid_spaces * 99.999 ) - @grid_margin * 2 ) + 0% );
         float: left;
         display: block;
-        
-        @media( max-width: 768px ){
-            width: ( 99.999 - ( @grid_margin * 2 ) + 0% );
-            float: none;
-        }
     }
     
     .loop( @index - 1 );
