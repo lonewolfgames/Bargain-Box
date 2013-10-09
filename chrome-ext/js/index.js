@@ -44,7 +44,7 @@
 				
 				var atag = $("#app a");
 				atag.prependString("href", baseURL);
-				atag.attr("tarajaxGet", "_blank");
+				atag.attr("target", "_blank");
 				
 				$("#app form").on("submit", function(e){
 					e.preventDefault();
@@ -80,7 +80,7 @@
 				});
 			},
 			function(error){
-				displayError(error);
+				displayError("Something went wrong, try reopening the extension or reloading the browser");
 			}
 		);
 	}
@@ -217,7 +217,7 @@
 				
 				if (cart) {
 					index = CARTS.indexOf(cart);
-					CARTS.splice(index,1);
+					CARTS.splice(index, 1);
 				}
 				home();
 				displayMessage("Cart "+ cart.title +" was deleted");
