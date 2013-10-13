@@ -3,7 +3,7 @@ class Box::CartsController < Box::BaseController
 
   # GET /carts
   def index
-    @carts ||= current_user.carts.load
+    @carts = current_user.carts.order('updated_at DESC').load
     respond_with(@carts)
   end
   

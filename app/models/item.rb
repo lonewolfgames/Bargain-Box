@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
   include PageParser
 
   # relations
-  belongs_to :cart
+  belongs_to :cart, touch: true
 
   # validations
   validates :title, :host, :url, presence: true
