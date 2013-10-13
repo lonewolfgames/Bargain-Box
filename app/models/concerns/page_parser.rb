@@ -1,7 +1,7 @@
 module PageParser
 
   def parse_page
-    raise 'Implement'
+    ScraperWorker.perform_async(self, 1)
   end
 
 end

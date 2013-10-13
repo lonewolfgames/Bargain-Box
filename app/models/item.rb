@@ -23,6 +23,8 @@ class Item < ActiveRecord::Base
 
   end
 
+  after_create :parse!
+
   def base_price
     read_attribute(:base_price).to_f / 100
   end
