@@ -7,6 +7,7 @@ class Item < ActiveRecord::Base
 
   # validations
   validates :title, :host, :url, presence: true
+  validates_uniqueness_of :url, scope: :cart_id
 
   # states
   state_machine initial: :created do
