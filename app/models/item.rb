@@ -1,6 +1,4 @@
 class Item < ActiveRecord::Base
-  # inheritance
-  include PageParser
 
   # relations
   belongs_to :cart, touch: true
@@ -33,5 +31,10 @@ class Item < ActiveRecord::Base
   def base_price=(price)
     write_attribute(:base_price, price * 100)
   end
+
+  protected
+    def parse_page
+      ScraperWorker.perform_async(self.id)
+    end
 
 end

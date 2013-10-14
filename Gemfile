@@ -37,6 +37,9 @@ end
 
 gem 'sidekiq'
 
+# custom parsing
+gem 'mechanize'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
