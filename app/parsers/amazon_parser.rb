@@ -4,7 +4,7 @@ class AmazonParser
   end
 
   def self.get_image_url(page)
-    page.search('#main-image').attribute('src').value
+    page.search('#prodImageCell img').attribute('src').value
   end
 
   def self.get_base_price(page)

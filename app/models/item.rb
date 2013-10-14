@@ -10,7 +10,7 @@ class Item < ActiveRecord::Base
   # states
   state_machine initial: :created do
 
-    before_transition on: :parse, do: :scrape
+    after_transition on: :parse, do: :scrape
     
     event :parse do
       transition created: :parsing
