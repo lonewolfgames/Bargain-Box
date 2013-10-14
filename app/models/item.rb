@@ -10,7 +10,7 @@ class Item < ActiveRecord::Base
   # states
   state_machine initial: :created do
 
-    before_transition on: :parse, do: :parse_page
+    before_transition on: :parse, do: :scrape
     
     event :parse do
       transition created: :parsing
@@ -18,6 +18,14 @@ class Item < ActiveRecord::Base
 
     event :complete do
       transition parsing: :completed
+    end
+
+    state :parsing do
+      validates :title, :host, :url, presence: true
+    end
+
+    state :complete do
+      validates :raw_http_body, :product_title, :base_price, :image_url, presence: true
     end
 
   end
@@ -33,7 +41,7 @@ class Item < ActiveRecord::Base
   end
 
   protected
-    def parse_page
+    def scrape
       ScraperWorker.perform_async(self.id)
     end
 

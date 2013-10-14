@@ -3,7 +3,8 @@ class ScraperWorker
 
   def perform(item_id)
     item = Item.find(item_id)
-    puts item.inspect
+    pp = PageParser.new(item)
+    pp.parse!
   end
 
 end
