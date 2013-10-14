@@ -9,10 +9,6 @@ class AmazonParser
 
   def self.get_base_price(page)
     price_text = page.search('#actualPriceValue .priceLarge').text
-    if m = /[a-zA-Z]+/.match(price_text)
-      pvalue = price_text.gsub(/(#{m})?\s/, '')
-    else
-      pvalue = price_text.gsub(/\s/, '')
-    end
+    Money.parse(price_text).cents
   end
 end

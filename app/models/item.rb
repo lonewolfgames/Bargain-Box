@@ -36,10 +36,6 @@ class Item < ActiveRecord::Base
     read_attribute(:base_price).to_f / 100
   end
 
-  def base_price=(price)
-    write_attribute(:base_price, price * 100)
-  end
-
   protected
     def scrape
       ScraperWorker.perform_async(self.id)
