@@ -19,6 +19,7 @@ class PageParser
       @item.image_url  = parser.get_image_url(@page)
       @item.save!
     end
+    @item.complete!
   end
 
   protected
