@@ -36,7 +36,7 @@
 				var app_div = $("#app");
 				SIGNED_IN = false;
 				
-				$("#user-nav").empty();
+				$("#sign_out").html("&nbsp;");
 				clear();
 				app_div.append(html);
 				
@@ -119,17 +119,12 @@
 		SIGNED_IN = true;
 		CARTS = carts;
 		
-		var user_nav = $("#user-nav"),
-			sign_out_btn = createElement(undefined, "padding-right", "a", "Sign Out"),
-			profile_btn = createElement(undefined, "padding-right", "a", "Profile");
+		var sign_out_div = $("#sign_out"),
+			sign_out_btn = createElement(undefined, "padding-right", "a", "Sign Out");
 		
-		user_nav.empty();
-		user_nav.append(sign_out_btn, profile_btn);
-		
+		sign_out_div.empty();
+		sign_out_div.append(sign_out_btn);
 		sign_out_btn.on("click", sign_out);
-		profile_btn.on("click", function(){
-			window.open(baseURL +"/users/edit");
-		});
 		
 		home();
 	}

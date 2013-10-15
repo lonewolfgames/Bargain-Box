@@ -2,7 +2,8 @@ require 'mechanize'
 
 class PageParser
   DOMAINS = {
-    "www.amazon.es" => AmazonParser
+    "www.amazon.es" => AmazonParser,
+    "www.ebay.com" => EbayParser
   }
   attr_accessor :item, :agent, :page
 
