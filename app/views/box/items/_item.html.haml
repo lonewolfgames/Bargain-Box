@@ -3,8 +3,6 @@
   %td= item.host
   %td= item.url
   %td
-    %span= link_to t('actions.show'), [@cart, item]
-    %span= "|"
-    %span= link_to t('actions.edit'), [:edit, @cart, item]
-    %span= "|"
-    %span= link_to t('actions.delete'), [@cart, item], method: :delete, confirm: t('action_check')
+    =link_to t('actions.show'), [@cart, item]
+    =link_to t('actions.edit'), [:edit, @cart, item]
+    =link_to t('actions.delete'), [@cart, item], method: :delete, confirm: t('action_check')

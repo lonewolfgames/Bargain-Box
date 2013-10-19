@@ -1,5 +1,4 @@
 = simple_form_for @cart, class: 'form-horizontal' do |cart_form|
-  = cart_form.input :title
   = cart_form.simple_fields_for :items do |item_form|
     = item_form.input :title
     = item_form.input :host

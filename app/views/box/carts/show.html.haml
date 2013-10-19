@@ -1,5 +1,9 @@
 %h2= @cart.title
-= link_to [:new, @cart, :item], class: 'btn btn-default' do
-  %span=  t('.new_item')
-%br/
-= render @cart.items
+%table.table.table-striped
+  %thead
+    %th= t('.title')
+    %th= t('.host')
+    %th= t('.url')
+    %th= t('.options')
+  %tbody
+    = render @cart.items

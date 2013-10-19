@@ -4,11 +4,10 @@ class EbayParser
   end
 
   def self.get_image_url(page)
-    value = page.search('#mainImgHldr #icImg').attribute('src').value
+    value = page.search('#icImg').attribute('src').value
   end
 
   def self.get_base_price(page)
     price_text = page.search('#prcIsum').text
-    Money.parse(price_text).cents
   end
 end
