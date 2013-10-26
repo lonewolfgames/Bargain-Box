@@ -16,7 +16,8 @@
       %td= @item.product_title
     %tr
       %td= t('.image_url')
-      %img{ src: @item.image_url }
+      %td
+        %img{ src: @item.image_url }
     %tr
       %td= t('.base_price')
       %td= @item.base_price
