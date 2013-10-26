@@ -35,6 +35,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'sidekiq'
 
 # custom parsing
