@@ -2,8 +2,8 @@ require 'mechanize'
 
 class PageParser
   DOMAINS = {
-    "www.amazon.es" => AmazonParser,
-    "www.ebay.com" => EbayParser
+    "amazon" => AmazonParser,
+    "ebay" => EbayParser
   }
   attr_accessor :item, :agent, :page
 
@@ -32,10 +32,16 @@ class PageParser
     end
 
     def build_domain_parser(&block)
-      klass = DOMAINS[URI(@item.url).host]
+      klass = DOMAINS[ extract_domain(@item.host) ]
       raise StandardError, "Unknown domain" if klass.nil?
       if block_given?
         yield klass
       end
+    end
+
+    def extract_domain(host)
+      host = host[0, host.rindex('.')]
+      host = host[host.rindex('.')+1,host.length] if host.index('.')
+      host
     end
 end
