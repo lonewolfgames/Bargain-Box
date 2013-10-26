@@ -2,7 +2,7 @@ class Cart < ActiveRecord::Base
 
   # relations
   belongs_to :user
-  has_many :items
+  has_many :items, dependent: :destroy
 
   # nested resources
   accepts_nested_attributes_for :items

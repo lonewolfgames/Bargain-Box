@@ -32,8 +32,9 @@ class PageParser
     end
 
     def build_domain_parser(&block)
+      ed = extract_domain(@item.host)
       klass = DOMAINS[ extract_domain(@item.host) ]
-      raise StandardError, "Unknown domain" if klass.nil?
+      raise StandardError, "Unknown domain #{}" if klass.nil?
       if block_given?
         yield klass
       end
