@@ -2,7 +2,6 @@
 	%td
 		%img{ src: item.image_url }
 	%td
-		=item.title
+		%h3= item.title
 		=link_to t('actions.show'), [@cart, item]
-		=link_to t('actions.edit'), [:edit, @cart, item]
 		=link_to t('actions.delete'), [@cart, item], method: :delete, confirm: t('action_check')

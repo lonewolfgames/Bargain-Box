@@ -17,6 +17,4 @@ BargainBox::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   
   root to: "home#index"
-  get "/about", to: "home#about"
-  get "/contact", to: "home#contact"
 end

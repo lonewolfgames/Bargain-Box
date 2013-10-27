@@ -15,12 +15,7 @@
   %body{:class => "#{controller_name} #{action_name}"}
     #header
       .container
-        .container.col-md-8
-          %h1.col-md-6 Bargain Box
-          %nav.col-md-6.navbar.navbar-default
-            = link_to "About", about_path, { :type=>"button", :class=>"btn btn-primary" }
-            = link_to "Contact", contact_path, { :type=>"button", :class=>"btn btn-primary" }
-        %div#nav.col-md-4
+        %div#nav.col-md-offset-8.col-md-4
           #user-nav
             - if user_signed_in?
               = link_to "Sign out", destroy_user_session_url(subdomain: Settings.app_subdomain), { :method => :delete, :type=>"button", :class=>"btn btn-primary" }

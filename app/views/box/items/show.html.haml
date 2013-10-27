@@ -6,4 +6,4 @@
 			%td
 				%img{ src: @item.image_url }
 			%td
-				= @item.product_title
+				%h3= link_to @item.product_title, @item.url, {target: "_blank"}
