@@ -1,9 +1,9 @@
 %h2= @cart.title
+= link_to t('actions.delete_cart'), [@cart], class: 'btn btn-sm btn-default', method: :delete, data: { confirm: t('action_check')}
+= link_to t('actions.edit_cart'), [:edit, :cart], class: 'btn btn-sm btn-default'
 %table.table.table-striped
-  %thead
-    %th= t('.title')
-    %th= t('.host')
-    %th= t('.url')
-    %th= t('.options')
-  %tbody
-    = render @cart.items
+	%thead
+		%th= t('.image')
+		%th= t('.info')
+	%tbody
+		= render @cart.items

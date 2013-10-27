@@ -7,10 +7,7 @@
     %td
       = link_to I18n.t('actions.edit'), [:edit, cart]
       = link_to t('actions.show'), [cart]
-      = link_to t('actions.delete'), [cart], method: :delete, confirm: t('action_check'), data: { confirm: true }
+      = link_to t('actions.delete'), [cart], method: :delete, data: { confirm: t('action_check') }
 - when :list
-  %li.row
-    = link_to cart.title, [cart], { class: "col-md-7" }
-    %span.padding
-      = link_to t('actions.edit'), [cart], class: "col-md-2"
-      = link_to t('actions.delete'), [cart], method: :delete, confirm: t('action_check'), data: { confirm: true }, class: "col-md-3"
+  %li
+    = link_to cart.title, [cart]
