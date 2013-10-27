@@ -4,5 +4,16 @@
 
 img{
 	max-width: 100%;
-	vertical-align: middle;
+}
+
+
+.home.index #main{
+	padding: 64px;
+}
+.home.index .logo{
+	display: block;
+	margin: 0 auto;
+}
+.home.index .title{
+	font-size: 6em;
 }

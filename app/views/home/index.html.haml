@@ -1,3 +1,8 @@
-%h1.text-center BargainBox
 
-%img{src: "assets/logo.png"}
+
+%img{src: "assets/logo.png", class: "logo"}
+%h1.title.text-center BargainBox
+
+.text-center
+	= link_to "Sign Up", new_user_registration_url(subdomain: Settings.app_subdomain), { :type=>"button", :class=>"btn btn-primary" }
+	= link_to "Sign In", new_user_session_url(subdomain: Settings.app_subdomain), { :type=>"button", :class=>"btn btn-primary" }
