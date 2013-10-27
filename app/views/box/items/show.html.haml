@@ -1,23 +1,9 @@
 %h2= @item.title
 
 %table.table.table-striped
-  %tbody
-    %tr
-      %td= t('.host')
-      %td= @item.host
-    %tr
-      %td= t('.url')
-      %td= @item.url
-    %tr
-      %td= t('.created_at')
-      %td= @item.created_at
-    %tr
-      %td= t('.product_title')
-      %td= @item.product_title
-    %tr
-      %td= t('.image_url')
-      %td
-        %img{ src: @item.image_url }
-    %tr
-      %td= t('.base_price')
-      %td= @item.base_price
+	%tbody
+		%tr
+			%td
+				%img{ src: @item.image_url }
+			%td
+				= @item.product_title

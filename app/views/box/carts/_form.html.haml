@@ -1,6 +1,3 @@
 = simple_form_for @cart, class: 'form-horizontal' do |cart_form|
-  = cart_form.simple_fields_for :items do |item_form|
-    = item_form.input :title
-    = item_form.input :host
-    = item_form.input :url
+  = cart_form.input :title, {class: "form-control"}
   = cart_form.button :submit, class: 'btn btn-primary'
